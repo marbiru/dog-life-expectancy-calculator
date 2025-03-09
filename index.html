@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Life Expectancy Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input, select, button {
+            margin: 10px;
+            padding: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h2>🐶 Dog Life Expectancy Calculator 🐶</h2>
+    <label for="dogAge">Enter your dog's age (in years):</label>
+    <input type="number" id="dogAge" step="0.1">
+    <br><br>
+    <label for="dogSize">Select your dog's size:</label>
+    <select id="dogSize">
+        <option value="small">Small (e.g., Chihuahua, Pomeranian)</option>
+        <option value="medium">Medium (e.g., Border Collie, Cocker Spaniel)</option>
+        <option value="large">Large (e.g., Labrador, Golden Retriever)</option>
+        <option value="giant">Giant (e.g., Great Dane, Saint Bernard)</option>
+    </select>
+    <br><br>
+    <button onclick="calculateLifeExpectancy()">Calculate</button>
+    <br><br>
+    <p id="result"></p>
+
+    <script>
+        function calculateLifeExpectancy() {
+            let age = parseFloat(document.getElementById("dogAge").value);
+            let size = document.getElementById("dogSize").value;
+            let result = document.getElementById("result");
+
+            if (isNaN(age) || age < 0) {
+                result.innerHTML = "Please enter a valid dog age.";
+                return;
+            }
+
+            const lifeExpectancy = {
+                small: 15, // Small dogs
+                medium: 13, // Medium dogs
+                large: 10, // Large dogs
+                giant: 8    // Giant dogs
+            };
+
+            let avgLifespan = lifeExpectancy[size];
+            let remainingYears = Math.max(avgLifespan - age, 0);
+
+            if (remainingYears > 0) {
+                result.innerHTML = `Your dog is expected to live for about <b>${remainingYears.toFixed(1)}</b> more years.`;
+            } else {
+                result.innerHTML = "Your dog has surpassed the average life expectancy! Every extra day is a bonus. 💖";
+            }
+        }
+    </script>
+</body>
+</html>
